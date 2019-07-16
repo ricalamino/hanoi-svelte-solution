@@ -81,7 +81,7 @@
 
   function draw() {
 
-    instrucoes += "<section class=\"container grid grid-template-columns-3\">";
+    instrucoes += "<section class=\"grid grid-template-columns-3\">";
     //instrucoes += "Pilha origem: " + pilha_origem + "<br />";
 
     let stacksize = Math.max(pilha_origem.length, pilha_destino.length,pilha_meio.length) + 1;
@@ -119,16 +119,23 @@
   }
 </script>
 
-<h1>Hanoi solution</h1>
-<br />
-<label for="tamanho">Size of stack</label>
-<input name="tamanho" bind:value={tamanho} on:change={montar_origem} placeholder="Size of stack" />
-<br />
-<button on:click|preventDefault={hanoi}>Solve</button>
---
-<button on:click|preventDefault={reset}>Reset</button>
-<br />
-<br />
+<div class="mx-auto">
+  <h1 class="p-8 text-5xl text-center bg-gray-300">Hanoi solution</h1>
+  <br />
+  <div class="mx-auto w-6/12">  
+    <label for="tamanho">Size of stack</label>
+    <input name="tamanho"  bind:value={tamanho} on:change={montar_origem} placeholder="Size of stack" />
+    <br />
+    <br />
+
+    <button class="text-center "  on:click|preventDefault={hanoi}>Solve</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button  class="text-center " on:click|preventDefault={reset}>Reset</button>
+  </div>
+  <br />
+  <br />
+  {@html instrucoes}
+</div>
 
 
-{@html instrucoes}
+

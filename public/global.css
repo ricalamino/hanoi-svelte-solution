@@ -1,6 +1,7 @@
 html, body {
 	position: relative;
 	width: 100%;
+	
 }
 
 body {
@@ -8,7 +9,8 @@ body {
 	margin: 0;
 	padding: 8px;
 	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: 'Literata', serif;
+	
 }
 
 
@@ -51,14 +53,10 @@ button:focus {
 	border-color: #666;
 }
 
-.container {
-	background-color: #aaa;
-	padding: 10px;
-	max-width: 100%;
-}
-
 .grid {
 	display: grid;
+	background-color: #ddd;
+	padding: 10px;
 }
 
 .grid-template-columns-3 {
