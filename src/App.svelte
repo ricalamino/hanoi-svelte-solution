@@ -3,11 +3,10 @@
   let pilha_meio = [];
   let pilha_destino = [];
 
-  let instrucoes = "";
+  let instrucoes = '';
   let tamanho = 4;
 
   function reset() {
-    tamanho = 4;
     montar_origem();
     pilha_meio = [];
     pilha_destino = [];
@@ -25,6 +24,8 @@
     if (tamanho > 10) {
       alert("Stack must be less than 10, otherwise your computer will complain...");
     } else {
+      reset();
+      draw();
       dHanoi(pilha_origem.length, 1, 3, 2);
     }
   }
