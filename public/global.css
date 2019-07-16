@@ -50,3 +50,75 @@ button:active {
 button:focus {
 	border-color: #666;
 }
+
+.container {
+	background-color: #aaa;
+	padding: 10px;
+}
+
+.grid {
+	display: grid;
+}
+
+.grid-template-columns-3 {
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.stick {
+	display: block;
+	margin: 0px auto;
+	background-color: brown;
+	width: 15px;
+	height: 20px;
+}
+
+.item {
+	display :block;
+	margin: 2px auto;
+	height: 20px;
+	background-color: green;
+	text-align: center;
+	color: white;
+	font-size: 0.9rem;
+}
+
+.size1 {
+	width: 100px;
+}
+
+.size2 {
+	width: 130px;
+}
+
+.size3 {
+	width: 160px;
+}
+
+.size4 {
+	width: 190px;
+}
+
+.size5 {
+	width: 220px;
+}
+
+.size6 {
+	width: 250px;
+}
+
+.size7 {
+	width: 280px;
+}
+
+.size8 {
+	width: 310px;
+}
+
+.size9 {
+	width: 340px;
+}
+
+.size10 {
+	width: 370px;
+}
+
