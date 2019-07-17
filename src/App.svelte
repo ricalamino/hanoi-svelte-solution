@@ -164,8 +164,6 @@
         </option>
       {/each}
     </select>
-    <br />
-    <br />
 
    </div>
   <br />
