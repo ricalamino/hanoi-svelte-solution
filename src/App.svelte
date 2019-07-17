@@ -1,5 +1,4 @@
 <script>
-
   import { onMount } from 'svelte';
 
   let pilha_origem = [4, 3, 2, 1];
@@ -26,17 +25,16 @@
 
   onMount(async () => {
     selected.size = 1;
-		tamanho = 1;
+    tamanho = 1;
     montar_origem();
     hanoi();
-	});
-  
-  function select_change () {
+  });
+
+  function select_change() {
     tamanho = selected.size;
     montar_origem();
     hanoi();
   }
-  
 
   function reset() {
     montar_origem();
@@ -54,7 +52,9 @@
 
   function hanoi() {
     if (tamanho > 10) {
-      alert("Stack must be less than 10, otherwise your computer will complain...");
+      alert(
+        "Stack must be less than 10, otherwise your computer will complain..."
+      );
     } else {
       reset();
       draw();
@@ -107,69 +107,68 @@
 
     draw();
 
-    
     dHanoi(n - 1, via, to, from);
   }
 
   function draw() {
-
-    instrucoes += "<section class=\"grid grid-template-columns-3\">";
+    instrucoes += '<section class="grid grid-template-columns-3">';
     //instrucoes += "Pilha origem: " + pilha_origem + "<br />";
 
-    let stacksize = Math.max(pilha_origem.length, pilha_destino.length,pilha_meio.length) + 1;
+    let stacksize =
+      Math.max(pilha_origem.length, pilha_destino.length, pilha_meio.length) +
+      1;
 
     instrucoes += "<div>";
-    for (let i = 0; i < (stacksize - pilha_origem.length); i++) {
+    for (let i = 0; i < stacksize - pilha_origem.length; i++) {
       instrucoes += "<div class='stick'>&nbsp</div>";
     }
-    pilha_origem.reverse().forEach(value => {instrucoes += "<div class='item size"+value+"'>" + value + "</div>"; });
+    pilha_origem.reverse().forEach(value => {
+      instrucoes += "<div class='item size" + value + "'>" + value + "</div>";
+    });
     pilha_origem.reverse();
     instrucoes += "</div>";
 
     //instrucoes += "Pilha meio: " + pilha_meio + "<br />";
     instrucoes += "<div>";
-    for (let i = 0; i < (stacksize - pilha_meio.length); i++) {
+    for (let i = 0; i < stacksize - pilha_meio.length; i++) {
       instrucoes += "<div class='stick'>&nbsp</div>";
     }
-    pilha_meio.reverse().forEach(value => {instrucoes += "<div class='item size"+value+"'>" + value + "</div>"; });
+    pilha_meio.reverse().forEach(value => {
+      instrucoes += "<div class='item size" + value + "'>" + value + "</div>";
+    });
     pilha_meio.reverse();
     instrucoes += "</div>";
 
     //instrucoes += "Pilha destino: " + pilha_destino + "<br />";
     instrucoes += "<div>";
-    for (let i = 0; i < (stacksize - pilha_destino.length); i++) {
+    for (let i = 0; i < stacksize - pilha_destino.length; i++) {
       instrucoes += "<div class='stick'>&nbsp</div>";
     }
-    pilha_destino.reverse().forEach(value => {instrucoes += "<div class='item size"+value+"'>" + value + "</div>"; });
+    pilha_destino.reverse().forEach(value => {
+      instrucoes += "<div class='item size" + value + "'>" + value + "</div>";
+    });
     pilha_destino.reverse();
     instrucoes += "</div>";
 
-    
     instrucoes += "</section>";
     instrucoes += "---" + "<br /><br />";
-
   }
 </script>
 
 <div class="mx-auto">
   <h1 class="p-8 text-5xl text-center bg-gray-300">Hanoi solution</h1>
   <br />
-  <div class="mx-auto w-6/12">  
+  <div class="mx-auto w-6/12">
     <label for="tamanho">Select stack size</label>
 
-    <select bind:value={selected} on:change="{select_change}">
+    <select bind:value={selected} on:change={select_change}>
       {#each tamanhos as opcao}
-        <option value={opcao}>
-          {opcao.size}
-        </option>
+        <option value={opcao}>{opcao.size}</option>
       {/each}
     </select>
 
-   </div>
+  </div>
   <br />
   <br />
   {@html instrucoes}
 </div>
-
-
-
