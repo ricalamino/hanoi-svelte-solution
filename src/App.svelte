@@ -159,7 +159,7 @@
 
     <select bind:value={selected} on:change="{select_change}">
       {#each tamanhos as opcao}
-        <option value={opcao.id}>
+        <option value={opcao}>
           {opcao.size}
         </option>
       {/each}
