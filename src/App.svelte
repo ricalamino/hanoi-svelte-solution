@@ -1,10 +1,42 @@
 <script>
+
+  import { onMount } from 'svelte';
+
   let pilha_origem = [4, 3, 2, 1];
   let pilha_meio = [];
   let pilha_destino = [];
 
   let instrucoes = '';
   let tamanho = 4;
+
+  let tamanhos = [
+    { id: 1, size: 1 },
+    { id: 2, size: 2 },
+    { id: 3, size: 3 },
+    { id: 4, size: 4 },
+    { id: 5, size: 5 },
+    { id: 6, size: 6 },
+    { id: 7, size: 7 },
+    { id: 8, size: 8 },
+    { id: 9, size: 9 },
+    { id: 10, size: 10 }
+  ];
+
+  let selected;
+
+  onMount(async () => {
+    selected.size = 1;
+		tamanho = 1;
+    montar_origem();
+    hanoi();
+	});
+  
+  function select_change () {
+    tamanho = selected.size;
+    montar_origem();
+    hanoi();
+  }
+  
 
   function reset() {
     montar_origem();
@@ -123,15 +155,19 @@
   <h1 class="p-8 text-5xl text-center bg-gray-300">Hanoi solution</h1>
   <br />
   <div class="mx-auto w-6/12">  
-    <label for="tamanho">Size of stack</label>
-    <input name="tamanho"  bind:value={tamanho} on:change={montar_origem} placeholder="Size of stack" />
+    <label for="tamanho">Select stack size</label>
+
+    <select bind:value={selected} on:change="{select_change}">
+      {#each tamanhos as opcao}
+        <option value={opcao}>
+          {opcao.size}
+        </option>
+      {/each}
+    </select>
     <br />
     <br />
 
-    <button class="text-center "  on:click|preventDefault={hanoi}>Solve</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <button  class="text-center " on:click|preventDefault={reset}>Reset</button>
-  </div>
+   </div>
   <br />
   <br />
   {@html instrucoes}
