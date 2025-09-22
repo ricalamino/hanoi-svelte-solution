@@ -7,6 +7,9 @@
 
   let instrucoes = '';
   let tamanho = 4;
+  let moveCount = 0;
+  let isAnimating = false;
+  let showHistory = false;
 
   let tamanhos = [
     { id: 1, size: 1 },
@@ -24,14 +27,16 @@
   let selected;
 
   onMount(async () => {
-    selected.size = 1;
+    selected = tamanhos[0];
     tamanho = 1;
     montar_origem();
     hanoi();
   });
 
   function select_change() {
+    if (isAnimating) return;
     tamanho = selected.size;
+    moveCount = 0;
     montar_origem();
     hanoi();
   }
@@ -41,6 +46,8 @@
     pilha_meio = [];
     pilha_destino = [];
     instrucoes = "";
+    moveCount = 0;
+    isAnimating = false;
   }
 
   function montar_origem() {
@@ -66,6 +73,8 @@
     if (n == 0) return;
 
     dHanoi(n - 1, from, via, to);
+
+    moveCount++;
 
     switch (from) {
       case 1:
@@ -100,75 +109,166 @@
         break;
     }
 
-    console.log("Pilha origem: " + pilha_origem);
-    console.log("Pilha meio: " + pilha_meio);
-    console.log("Pilha destino: " + pilha_destino);
-    console.log("---");
-
     draw();
 
     dHanoi(n - 1, via, to, from);
   }
 
   function draw() {
-    instrucoes += '<section class="grid grid-template-columns-3">';
-    //instrucoes += "Pilha origem: " + pilha_origem + "<br />";
+    instrucoes += '<section class="game-step fade-in">';
+    instrucoes += `<div class="move-counter">Move ${moveCount}</div>`;
+    instrucoes += '<div class="towers-container">';
 
     let stacksize =
       Math.max(pilha_origem.length, pilha_destino.length, pilha_meio.length) +
       1;
 
-    instrucoes += "<div>";
+    // Tower A (Origin)
+    instrucoes += "<div class='tower'>";
+    instrucoes += "<div class='tower-label'>A</div>";
+    instrucoes += "<div class='tower-content'>";
+    instrucoes += "<div class='tower-stick'></div>";
+    
+    // Empty slots first (top of tower)
     for (let i = 0; i < stacksize - pilha_origem.length; i++) {
-      instrucoes += "<div class='stick'>&nbsp</div>";
+      instrucoes += "<div class='empty-slot'></div>";
     }
-    pilha_origem.reverse().forEach(value => {
-      instrucoes += "<div class='item size" + value + "'>" + value + "</div>";
+    
+    // Disks from top to bottom (reverse order to stack properly)
+    let temp_origem = [...pilha_origem].reverse();
+    temp_origem.forEach(value => {
+      instrucoes += `<div class='disk disk-${value}'>${value}</div>`;
     });
-    pilha_origem.reverse();
+    
+    instrucoes += "<div class='tower-base'></div>";
+    instrucoes += "</div>";
     instrucoes += "</div>";
 
-    //instrucoes += "Pilha meio: " + pilha_meio + "<br />";
-    instrucoes += "<div>";
+    // Tower B (Middle)
+    instrucoes += "<div class='tower'>";
+    instrucoes += "<div class='tower-label'>B</div>";
+    instrucoes += "<div class='tower-content'>";
+    instrucoes += "<div class='tower-stick'></div>";
+    
+    // Empty slots first (top of tower)
     for (let i = 0; i < stacksize - pilha_meio.length; i++) {
-      instrucoes += "<div class='stick'>&nbsp</div>";
+      instrucoes += "<div class='empty-slot'></div>";
     }
-    pilha_meio.reverse().forEach(value => {
-      instrucoes += "<div class='item size" + value + "'>" + value + "</div>";
+    
+    // Disks from top to bottom (reverse order to stack properly)
+    let temp_meio = [...pilha_meio].reverse();
+    temp_meio.forEach(value => {
+      instrucoes += `<div class='disk disk-${value}'>${value}</div>`;
     });
-    pilha_meio.reverse();
+    
+    instrucoes += "<div class='tower-base'></div>";
+    instrucoes += "</div>";
     instrucoes += "</div>";
 
-    //instrucoes += "Pilha destino: " + pilha_destino + "<br />";
-    instrucoes += "<div>";
+    // Tower C (Destination)
+    instrucoes += "<div class='tower'>";
+    instrucoes += "<div class='tower-label'>C</div>";
+    instrucoes += "<div class='tower-content'>";
+    instrucoes += "<div class='tower-stick'></div>";
+    
+    // Empty slots first (top of tower)
     for (let i = 0; i < stacksize - pilha_destino.length; i++) {
-      instrucoes += "<div class='stick'>&nbsp</div>";
+      instrucoes += "<div class='empty-slot'></div>";
     }
-    pilha_destino.reverse().forEach(value => {
-      instrucoes += "<div class='item size" + value + "'>" + value + "</div>";
+    
+    // Disks from top to bottom (reverse order to stack properly)
+    let temp_destino = [...pilha_destino].reverse();
+    temp_destino.forEach(value => {
+      instrucoes += `<div class='disk disk-${value}'>${value}</div>`;
     });
-    pilha_destino.reverse();
+    
+    instrucoes += "<div class='tower-base'></div>";
+    instrucoes += "</div>";
     instrucoes += "</div>";
 
-    instrucoes += "</section>";
-    instrucoes += "---" + "<br /><br />";
+    instrucoes += "</div></section>";
+  }
+
+  function toggleHistory() {
+    showHistory = !showHistory;
   }
 </script>
 
-<div class="mx-auto">
-  <h1 class="p-8 text-5xl text-center bg-gray-300">Hanoi solution</h1>
-  <br />
-  <div class="mx-auto w-6/12">
-    <label for="tamanho">Select stack size</label>
+<div class="app-container">
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="main-title">
+        <span class="title-icon">🏗️</span>
+        Tower of Hanoi
+      </h1>
+      <p class="subtitle">Classic Mathematical Puzzle Visualization</p>
+      <div class="controls">
+        <div class="control-group">
+          <label for="tamanho" class="control-label">Number of Disks:</label>
+          <select bind:value={selected} on:change={select_change} class="disk-selector">
+            {#each tamanhos as opcao}
+              <option value={opcao}>{opcao.size}</option>
+            {/each}
+          </select>
+        </div>
+        <button on:click={toggleHistory} class="history-btn">
+          {showHistory ? 'Hide' : 'Show'} History
+        </button>
+      </div>
+    </div>
+  </header>
 
-    <select bind:value={selected} on:change={select_change}>
-      {#each tamanhos as opcao}
-        <option value={opcao}>{opcao.size}</option>
-      {/each}
-    </select>
+  <!-- History Section -->
+  {#if showHistory}
+    <section class="history-section">
+      <h2>The Legend of Tower of Hanoi</h2>
+      <div class="history-content">
+        <p>
+          The Tower of Hanoi is a mathematical puzzle that was invented by the French mathematician 
+          <strong>Édouard Lucas</strong> in 1883. The puzzle consists of three rods and a number of disks 
+          of different sizes which can slide onto any rod.
+        </p>
+        <p>
+          According to legend, there is a temple in Kashi Vishwanath (Varanasi) where priests are moving 
+          64 golden disks from one diamond rod to another. The legend says that when the last move is 
+          completed, the world will end. With the optimal solution requiring 2^64 - 1 moves, this would 
+          take approximately 585 billion years to complete!
+        </p>
+        <h3>Rules:</h3>
+        <ul>
+          <li>Only one disk can be moved at a time</li>
+          <li>Each move consists of taking the upper disk from one stack and placing it on top of another stack</li>
+          <li>No disk may be placed on top of a smaller disk</li>
+        </ul>
+      </div>
+    </section>
+  {/if}
 
-  </div>
-  <br />
-  <br />
-  {@html instrucoes}
+  <!-- Game Explanation -->
+  <section class="explanation">
+    <h2>How it Works</h2>
+    <p>
+      This visualization shows the optimal solution to the Tower of Hanoi puzzle. 
+      The goal is to move all disks from tower A to tower C, using tower B as auxiliary. 
+      Watch as each move is executed step by step, following the recursive algorithm 
+      that guarantees the minimum number of moves: <strong>2^n - 1</strong> where n is the number of disks.
+    </p>
+  </section>
+
+  <!-- Game Visualization -->
+  <section class="game-section">
+    <div class="game-info">
+      <div class="info-card">
+        <h3>Current Configuration</h3>
+        <p>Disks: <strong>{tamanho}</strong></p>
+        <p>Total Moves: <strong>{moveCount}</strong></p>
+        <p>Minimum Moves: <strong>{Math.pow(2, tamanho) - 1}</strong></p>
+      </div>
+    </div>
+    <div class="game-visualization">
+      {@html instrucoes}
+    </div>
+  </section>
 </div>
+

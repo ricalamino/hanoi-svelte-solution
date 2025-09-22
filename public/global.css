@@ -1,123 +1,23 @@
 html, body {
 	position: relative;
 	width: 100%;
-	
-}
-
-body {
-	color: #333;
 	margin: 0;
-	padding: 8px;
+	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Literata', serif;
-	
 }
 
-
-a:hover {
-	background-color: #666;
-}
-
-label {
-	display: block;
-}
-
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
+* {
 	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
 }
 
-input:disabled {
-	color: #ccc;
+/* Reset default styles */
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	line-height: 1.6;
 }
 
-input[type="range"] {
-	height: 0;
-}
-
-button {
-	background-color: #f4f4f4;
-	outline: none;
-}
-
-button:active {
-	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
-}
-
-.grid {
-	display: grid;
-	background-color: #ddd;
-	padding: 10px;
-}
-
-.grid-template-columns-3 {
-	grid-template-columns: 1fr 1fr 1fr;
-}
-
-.stick {
-	display: block;
-	margin: 0px auto;
-	background-color: brown;
-	width: 15px;
-	height: 20px;
-}
-
-.item {
-	display :block;
-	margin: 2px auto;
-	height: 20px;
-	background-color: green;
-	text-align: center;
-	color: white;
-	font-size: 0.9rem;
-}
-
-.size1 {
-	width: 50px;
-}
-
-.size2 {
-	width: 80px;
-}
-
-.size3 {
-	width: 110px;
-}
-
-.size4 {
-	width: 140px;
-}
-
-.size5 {
-	width: 170px;
-}
-
-.size6 {
-	width: 200px;
-}
-
-.size7 {
-	width: 230px;
-}
-
-.size8 {
-	width: 260px;
-}
-
-.size9 {
-	width: 290px;
-}
-
-.size10 {
-	width: 320px;
+/* Smooth scrolling */
+html {
+	scroll-behavior: smooth;
 }
 
