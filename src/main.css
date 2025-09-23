@@ -634,31 +634,224 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
   .main-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
   }
 
   .title-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .header {
+    padding: 2rem 0;
   }
 
   .controls {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .control-group {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    text-align: center;
+  }
+
+  .control-label {
+    font-size: 1.1rem;
+  }
+
+  .disk-selector {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+
+  .history-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
   }
 
   .towers-container {
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
   }
+
+  .tower {
+    min-height: 250px;
+  }
+
+  .tower-label {
+    font-size: 1.4rem;
+    top: -2.5rem;
+  }
+
+  .tower-base {
+    width: 100px;
+  }
+
+  .tower-stick {
+    height: 150px;
+  }
+
+  .tower-base::before {
+    height: 150px;
+    top: -150px;
+  }
+
+  .disk {
+    height: 28px;
+    font-size: 0.9rem;
+    border-radius: 14px;
+  }
+
+  .empty-slot {
+    height: 25px;
+  }
+
+  /* Disk sizes for mobile */
+  .disk-1 { width: 35px; }
+  .disk-2 { width: 45px; }
+  .disk-3 { width: 55px; }
+  .disk-4 { width: 65px; }
+  .disk-5 { width: 75px; }
+  .disk-6 { width: 85px; }
+  .disk-7 { width: 95px; }
+  .disk-8 { width: 105px; }
+  .disk-9 { width: 115px; }
+  .disk-10 { width: 125px; }
+
+  .header-content,
+  .history-section,
+  .explanation,
+  .game-section {
+    padding: 1.5rem;
+  }
+
+  .game-visualization {
+    padding: 1.5rem;
+  }
+
+  .game-step {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .move-counter {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .info-card {
+    padding: 1.5rem;
+    min-width: 250px;
+  }
+
+  .info-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .info-card p {
+    font-size: 1rem;
+  }
+
+  .history-section h2,
+  .explanation h2 {
+    font-size: 2rem;
+  }
+
+  .history-content p {
+    font-size: 1rem;
+  }
+
+  .history-content li {
+    font-size: 0.95rem;
+  }
+
+  .explanation p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 1.8rem;
+  }
+
+  .title-icon {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .header {
+    padding: 1.5rem 0;
+  }
+
+  .tower {
+    min-height: 200px;
+  }
+
+  .tower-stick {
+    height: 120px;
+  }
+
+  .tower-base::before {
+    height: 120px;
+    top: -120px;
+  }
+
+  .tower-base {
+    width: 80px;
+  }
+
+  .disk {
+    height: 24px;
+    font-size: 0.8rem;
+  }
+
+  .empty-slot {
+    height: 20px;
+  }
+
+  /* Even smaller disk sizes for very small screens */
+  .disk-1 { width: 30px; }
+  .disk-2 { width: 38px; }
+  .disk-3 { width: 46px; }
+  .disk-4 { width: 54px; }
+  .disk-5 { width: 62px; }
+  .disk-6 { width: 70px; }
+  .disk-7 { width: 78px; }
+  .disk-8 { width: 86px; }
+  .disk-9 { width: 94px; }
+  .disk-10 { width: 102px; }
 
   .header-content,
   .history-section,
   .explanation,
   .game-section {
     padding: 1rem;
+  }
+
+  .game-visualization {
+    padding: 1rem;
+  }
+
+  .game-step {
+    padding: 1rem;
+  }
+
+  .info-card {
+    padding: 1rem;
+    min-width: 200px;
   }
 }
